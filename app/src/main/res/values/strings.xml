@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">WeatherRest</string>
+    <string name="title_home">Home</string>
+
+    <!-- http://openweathermap.org/current -->
+    <string name="weather_api_key">15cf9b712a8454b5fcd0670649018163</string>
+
+    <!--api.openweathermap.org/data/2.5/weather?q={city name},{country code}-->
+    <string name="weather_base_url">"http://api.openweathermap.org/data/2.5/"</string>
+
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_current_weather">Current Weather</string>
+    <string name="weather">Weather</string>
+    <string name="forecast">Forecast</string>
+
+</resources>
