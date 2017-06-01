@@ -30,4 +30,3 @@ public class Wind {
     }
 
 }
-Haifa
