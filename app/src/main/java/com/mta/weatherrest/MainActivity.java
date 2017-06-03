@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.mta.model.WeatherResponse;
 import com.mta.util.RetrofitClient;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.location)
     AppCompatEditText mWhere;
 
+    //    String baseUrl = getResources().getString(R.string.weather_base_url);
+    @BindString(R.string.weather_base_url)
+    String baseUrl;
+    //    String key = getResources().getString(R.string.weather_api_key);
+    @BindString(R.string.weather_api_key)
+    String key;
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -35,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
+                    return true;
+                case R.id.navigation_weather:
                     if (mWhere.getText().length() == 0) {
-                        mWhere.setText("Ramat Gan,il");
+                        mWhere.setText("Ramat Gan");
                     }
                     getWeather(mWhere.getText().toString());
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_current_weather);
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
@@ -61,12 +70,15 @@ public class MainActivity extends AppCompatActivity {
      * http://www.jsonschema2pojo.org/
      */
     private void getWeather(String city) {
-        String baseUrl = getResources().getString(R.string.weather_base_url);
-        String key = getResources().getString(R.string.weather_api_key);
+
+        if (city.isEmpty()) {
+            mTextMessage.setText(R.string.empty_city);
+            return;
+        }
 
         WeatherService weatherService = RetrofitClient.getClient(baseUrl).create(WeatherService.class);
 
-        Call<WeatherResponse> weather = weatherService.getWeather(city);
+        Call<WeatherResponse> weather = weatherService.getWeather(city, key, "metric");
         weather.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {

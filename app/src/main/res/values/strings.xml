@@ -13,5 +13,6 @@
     <string name="title_current_weather">Current Weather</string>
     <string name="weather">Weather</string>
     <string name="forecast">Forecast</string>
+    <string name="empty_city">Please type a city name</string>
 
 </resources>
