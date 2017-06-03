@@ -23,7 +23,11 @@ public interface WeatherService {
      * @param city
      * @return
      */
-    @GET("weather?appid=15cf9b712a8454b5fcd0670649018163&units=metric")
-    Call<WeatherResponse> getWeather(@Query("q") String city);
+    @GET("weather")
+    Call<WeatherResponse> getWeather(
+            @Query("q") String city,
+            @Query("appid") String key,
+            @Query("units") String units
+            );
 
 }
